@@ -41,24 +41,35 @@ const features = [
 
 <template>
   <div class="pt-20 pb-32">
-    <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 text-center mb-24">
-      <!-- Pulse Mascot -->
-      <div class="flex justify-center mb-8 animate-reveal">
-        <svg viewBox="0 0 200 200" class="w-24 h-24 md:w-32 md:h-32 animate-float drop-shadow-[0_0_30px_rgba(61,104,243,0.3)]">
-          <circle cx="100" cy="100" r="80" fill="url(#pulse-grad)" />
-          <circle cx="70" cy="85" r="8" fill="white" />
-          <circle cx="130" cy="85" r="8" fill="white" />
-          <path d="M 75 130 Q 100 155 125 130" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" />
-          <defs>
-            <linearGradient id="pulse-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:var(--color-brand-600)" />
-              <stop offset="100%" style="stop-color:var(--color-brand-400)" />
-            </linearGradient>
-          </defs>
-        </svg>
+    <!-- Cinematic Hero Clip -->
+    <section class="w-full mb-16 animate-reveal">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="relative aspect-[21/9] w-full overflow-hidden glass-card !rounded-3xl border-white/20 group">
+          <!-- The "Clip" Background -->
+          <img 
+            src="/assets/hero_clip.png" 
+            alt="Clearpulse Story" 
+            class="w-full h-full object-cover animate-cinematic"
+          />
+          
+          <!-- Cinematic Overlays -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-20 h-20 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+              <div class="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-2"></div>
+            </div>
+          </div>
+          
+          <!-- Badge -->
+          <div class="absolute top-6 left-6 glass px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-brand-400 bg-slate-900/50">
+            Cinematic Feature: Anonymity vs Security
+          </div>
+        </div>
       </div>
+    </section>
 
+    <!-- Hero Titles -->
+    <section class="max-w-7xl mx-auto px-6 text-center mb-24">
       <h1 class="text-6xl md:text-8xl font-display font-extrabold tracking-tighter mb-8 leading-[1.1] animate-reveal">
         Empower Your Voice.<br />
         <span class="text-brand-500">Anonymously.</span>
