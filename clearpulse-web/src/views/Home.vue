@@ -42,18 +42,18 @@ const features = [
 <template>
   <div class="pt-20 pb-32">
     <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 text-center mb-24 animate-fade-in">
-      <h1 class="text-6xl md:text-8xl font-display font-extrabold tracking-tighter mb-8 leading-[1.1]">
+    <section class="max-w-7xl mx-auto px-6 text-center mb-24">
+      <h1 class="text-6xl md:text-8xl font-display font-extrabold tracking-tighter mb-8 leading-[1.1] animate-reveal">
         Empower Your Voice.<br />
         <span class="text-brand-500">Anonymously.</span>
       </h1>
-      <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+      <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed animate-reveal [animation-delay:200ms]">
         The safe space for honest feedback and insights. <br class="hidden md:block" />
         No identity, no tracking—just pure communication.
       </p>
       
       <!-- Create Pulse Card -->
-      <div class="max-w-xl mx-auto glass-card p-2 md:p-3 animate-slide-up">
+      <div class="max-w-xl mx-auto glass-card p-2 md:p-3 animate-reveal [animation-delay:400ms]">
         <div class="flex flex-col md:flex-row gap-3">
           <input 
             v-model="title"
@@ -78,13 +78,14 @@ const features = [
       <div 
         v-for="(f, i) in features" 
         :key="i"
-        class="glass-card p-10 hover:border-white/20 transition-all group"
+        class="glass-card p-10 hover:border-white/20 transition-all group animate-reveal"
+        :style="{ animationDelay: `${(i + 1) * 150}ms` }"
       >
-        <div class="w-14 h-14 glass flex items-center justify-center mb-6 group-hover:bg-brand-500/10 transition-all">
-          <component :is="f.icon" class="text-brand-400" :size="28" />
+        <div class="w-16 h-16 glass flex items-center justify-center mb-8 group-hover:bg-brand-500/10 transition-all animate-float" :style="{ animationDelay: `${i * 500}ms` }">
+          <component :is="f.icon" class="text-brand-400" :size="32" />
         </div>
         <h3 class="text-2xl font-display font-bold text-white mb-4">{{ f.title }}</h3>
-        <p class="text-slate-400 leading-relaxed">{{ f.desc }}</p>
+        <p class="text-slate-400 leading-relaxed text-lg">{{ f.desc }}</p>
       </div>
     </section>
 
