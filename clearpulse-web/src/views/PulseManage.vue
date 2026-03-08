@@ -25,59 +25,88 @@ const copyLink = () => {
 </script>
 
 <template>
-  <div v-if="store.currentPulse" class="max-w-4xl mx-auto py-12 px-4">
-    <div class="flex justify-between items-start mb-8">
+  <div v-if="store.currentPulse" class="max-w-5xl mx-auto py-16 px-6 relative z-10 animate-fade-in">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
       <div>
-        <h1 class="text-3xl font-bold text-slate-900">{{ store.currentPulse.title }}</h1>
-        <p class="text-slate-500 mt-1 flex items-center gap-2">
-          <Clock :size="14" />
+        <h1 class="text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mb-3">
+          {{ store.currentPulse.title }}
+        </h1>
+        <p class="text-slate-400 flex items-center gap-2 font-medium">
+          <Clock :size="16" class="text-brand-400" />
           Created on {{ new Date(store.currentPulse.createdAt).toLocaleDateString() }}
         </p>
       </div>
       
-      <div class="flex gap-4">
+      <div class="flex gap-4 w-full md:w-auto">
         <button 
           @click="copyLink"
-          class="bg-white border text-slate-700 px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-slate-50 transition-all font-medium"
+          class="btn-primary !py-3 !px-6 text-sm flex-1 md:flex-none"
         >
-          <component :is="isCopied ? CheckCircle : Copy" :size="18" :class="isCopied ? 'text-emerald-500' : ''" />
-          {{ isCopied ? 'Copied!' : 'Copy Share Link' }}
+          <component :is="isCopied ? CheckCircle : Copy" :size="18" />
+          <span>{{ isCopied ? 'Copied URL' : 'Copy Share Link' }}</span>
         </button>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-12 gap-8">
-      <!-- Public URL Warning -->
-      <div class="md:col-span-12 glass p-6 border-l-4 border-l-amber-400 bg-amber-50/30">
-        <div class="flex gap-4">
-          <Share2 class="text-amber-500 shrink-0" />
-          <div>
-            <h3 class="font-semibold text-amber-900">Share this Pulse</h3>
-            <p class="text-sm text-amber-800/80">
-              Only you can see this page. Share the link below with others to get anonymous feedback.
-            </p>
-            <code class="block mt-3 p-2 bg-white/50 rounded border border-amber-200 text-xs break-all">
+    <div class="grid lg:grid-cols-12 gap-8">
+      <!-- Sidebar / Info -->
+      <div class="lg:col-span-4 space-y-6">
+        <div class="glass-card p-8 border-l-4 border-l-brand-500">
+          <div class="flex gap-4 mb-4 text-brand-400">
+            <Share2 :size="24" />
+            <h3 class="font-bold text-white uppercase tracking-wider text-sm mt-1">Share this Pulse</h3>
+          </div>
+          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+            Only you can accessed this dashboard. Share the public link below to receive anonymous responses.
+          </p>
+          <div class="relative">
+            <code class="block w-full p-4 glass bg-black/20 rounded-xl text-xs font-mono text-brand-300 break-all border border-white/5">
               {{ origin }}/p/{{ store.currentPulse.publicId }}
             </code>
           </div>
         </div>
+
+        <div class="glass-card p-8">
+          <h3 class="font-bold text-white uppercase tracking-wider text-sm mb-4">Pulse Analytics</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 glass bg-white/5 rounded-2xl text-center">
+              <div class="text-2xl font-bold text-white">{{ store.feedbacks.length }}</div>
+              <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1">Responses</div>
+            </div>
+            <div class="p-4 glass bg-white/5 rounded-2xl text-center">
+              <div class="text-2xl font-bold text-white">0</div>
+              <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1">Views</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Feedbacks -->
-      <div class="md:col-span-12 space-y-6">
-        <h2 class="text-xl font-semibold flex items-center gap-2">
-          <MessageSquare :size="20" class="text-safe-500" />
-          Responses ({{ store.feedbacks.length }})
-        </h2>
+      <!-- Feedbacks List -->
+      <div class="lg:col-span-8 space-y-6">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-2xl font-display font-bold text-white flex items-center gap-3">
+            <MessageSquare :size="24" class="text-brand-400" />
+            Responses
+          </h2>
+        </div>
         
-        <div v-if="store.feedbacks.length === 0" class="glass p-12 text-center">
-          <p class="text-slate-400">No responses yet. Share the link to start receiving feedback.</p>
+        <div v-if="store.feedbacks.length === 0" class="glass-card p-20 text-center">
+          <div class="w-16 h-16 glass mx-auto mb-6 flex items-center justify-center text-slate-600">
+            <MessageSquare :size="32" />
+          </div>
+          <p class="text-slate-400 font-medium italic">No responses yet. The silence is golden, but honesty is better.</p>
         </div>
 
-        <div v-for="f in store.feedbacks" :key="f.createdAt" class="glass p-6 animate-in fade-in slide-in-from-bottom-4">
-          <p class="text-slate-800 whitespace-pre-wrap leading-relaxed">{{ f.content }}</p>
-          <div class="mt-4 pt-4 border-t border-slate-100 flex justify-end">
-            <span class="text-xs text-slate-400">{{ new Date(f.createdAt).toLocaleString() }}</span>
+        <div 
+          v-for="(f, i) in store.feedbacks" 
+          :key="f.createdAt" 
+          class="glass-card p-8 animate-slide-up"
+          :style="{ animationDelay: `${i * 100}ms` }"
+        >
+          <p class="text-lg text-slate-200 whitespace-pre-wrap leading-relaxed mb-6">{{ f.content }}</p>
+          <div class="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-opacity">
+            <div class="h-[1px] flex-1 bg-white/10 mr-4"></div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ new Date(f.createdAt).toLocaleString() }}</span>
           </div>
         </div>
       </div>
