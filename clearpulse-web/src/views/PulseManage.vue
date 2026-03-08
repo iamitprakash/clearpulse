@@ -40,7 +40,7 @@ const copyLink = () => {
       <div class="flex gap-4 w-full md:w-auto">
         <button 
           @click="copyLink"
-          class="btn-primary !py-3 !px-6 text-sm flex-1 md:flex-none"
+          class="btn-primary py-3! px-6! text-sm flex-1 md:flex-none"
         >
           <component :is="isCopied ? CheckCircle : Copy" :size="18" />
           <span>{{ isCopied ? 'Copied URL' : 'Copy Share Link' }}</span>
@@ -105,7 +105,7 @@ const copyLink = () => {
         >
           <p class="text-lg text-slate-200 whitespace-pre-wrap leading-relaxed mb-6">{{ f.content }}</p>
           <div class="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-opacity">
-            <div class="h-[1px] flex-1 bg-white/10 mr-4"></div>
+            <div class="h-px flex-1 bg-white/10 mr-4"></div>
             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ new Date(f.createdAt).toLocaleString() }}</span>
           </div>
         </div>
