@@ -1,13 +1,17 @@
 # 🛡️ Clearpulse: Anonymous Feedback Platform
 
+![Clearpulse Cinematic Hero](./docs/assets/hero_clip.png)
+
 Clearpulse is an enterprise-grade anonymous feedback platform designed for absolute privacy, safety, and simplicity. It features a professional **N-tier .NET** backend and a high-fidelity **Vue 3** frontend with glassmorphic aesthetics.
 
 ## 🚀 Key Features
 
-- **N-Tier Architecture**: Clean separation between Domain, Application, Infrastructure, and API layers.
-- **Code First Database**: Powered by **PostgreSQL** with Entity Framework Core migrations.
+- **Cinematic Experience**: High-fidelity "Anonymity vs Security" storytelling via a premium hero clip.
+- **N-Tier Architecture**: Clean separation between Domain, Application, Infrastructure, and API layers (.NET 8).
 - **Identity-less Security**: Strictly no accounts, no IP logging, and no identity tracking.
-- **Premium UI**: Responsive Vue 3 application with a modern, "safe space" design.
+- **View Tracking**: Real-time engagement monitoring for every public Pulse.
+- **Premium UI**: Responsive Vue 3 application with a modern, "safe space" design and glassmorphic components.
+- **Dedicated Content**: Full "Features" and "Privacy Manifesto" pages explaining the platform's core values.
 - **Swagger Documentation**: Interactive API testing and exploration.
 
 ## 🏗️ Technical Stack
@@ -22,7 +26,7 @@ Clearpulse is an enterprise-grade anonymous feedback platform designed for absol
 
 ### Prerequisites
 
-- .NET 10 SDK
+- .NET 8 SDK
 - Node.js (v18+) & focus npm
 - Docker (for PostgreSQL)
 
