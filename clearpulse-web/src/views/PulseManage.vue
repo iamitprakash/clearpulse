@@ -74,7 +74,7 @@ const copyLink = () => {
               <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1">Responses</div>
             </div>
             <div class="p-4 glass bg-white/5 rounded-2xl text-center">
-              <div class="text-2xl font-bold text-white">0</div>
+              <div class="text-2xl font-bold text-white">{{ store.currentPulse.views }}</div>
               <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1">Views</div>
             </div>
           </div>

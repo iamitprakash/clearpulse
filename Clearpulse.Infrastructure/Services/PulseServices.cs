@@ -30,16 +30,19 @@ namespace Clearpulse.Infrastructure.Services
         {
             return await _context.Pulses
                 .Where(p => p.SecretToken == secretToken)
-                .Select(p => new { p.Id, p.Title, p.PublicId, p.CreatedAt })
+                .Select(p => new { p.Id, p.Title, p.PublicId, p.Views, p.CreatedAt })
                 .FirstOrDefaultAsync();
         }
 
         public async Task<object?> GetPublicPulseAsync(Guid publicId)
         {
-            return await _context.Pulses
-                .Where(p => p.PublicId == publicId)
-                .Select(p => new { p.Id, p.Title, p.CreatedAt })
-                .FirstOrDefaultAsync();
+            var pulse = await _context.Pulses.FirstOrDefaultAsync(p => p.PublicId == publicId);
+            if (pulse == null) return null;
+
+            pulse.Views++;
+            await _context.SaveChangesAsync();
+
+            return new { pulse.Id, pulse.Title, pulse.Views, pulse.CreatedAt };
         }
     }
 
